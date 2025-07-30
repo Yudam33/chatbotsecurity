@@ -1,4 +1,21 @@
 # main.py
+"""
+⚠️  SECURITY WARNING ⚠️
+This repository contains example API keys and configuration values that are NOT valid.
+These are placeholder values for demonstration purposes only.
+
+If you see any API keys, tokens, or credentials in this code:
+- They are EXAMPLE values only
+- They are NOT valid or functional
+- They should NOT be used in production
+- They are included only for code structure demonstration
+
+For actual use, you must:
+1. Create your own .env file with real credentials
+2. Never commit real API keys to version control
+3. Use environment variables for all sensitive data
+"""
+
 from fastmcp import FastMCP
 from sonnylabs_py import SonnyLabsClient
 from deep_translator import GoogleTranslator
@@ -58,6 +75,9 @@ def load_environment():
         print("⚠️  Using default .env search")
     
     # Get credentials with detailed logging
+    # NOTE: These environment variables should contain REAL API credentials
+    # The values "YOUR_API_KEY" and "YOUR_ANALYSIS_ID" are placeholders only
+    # You must set up your own .env file with actual credentials
     api_token = os.getenv("SONNYLABS_API_TOKEN")
     analysis_id = os.getenv("SONNYLABS_ANALYSIS_ID")
     
@@ -66,10 +86,12 @@ def load_environment():
     
     if not api_token or api_token == "YOUR_API_KEY":
         print("❌ ERROR: SONNYLABS_API_TOKEN not found or invalid!")
+        print("   This is expected if you haven't set up your .env file yet")
         return None, None
     
     if not analysis_id or analysis_id == "YOUR_ANALYSIS_ID":
         print("❌ ERROR: SONNYLABS_ANALYSIS_ID not found or invalid!")
+        print("   This is expected if you haven't set up your .env file yet")
         return None, None
     
     return api_token, analysis_id
@@ -78,6 +100,8 @@ def load_environment():
 api_token, analysis_id = load_environment()
 
 # Initialize the SonnyLabsClient with validated credentials
+# NOTE: This will only work with REAL API credentials from your .env file
+# The example values in this repository are not functional
 if api_token and analysis_id:
     client = SonnyLabsClient(
         api_token=api_token,
@@ -90,6 +114,7 @@ if api_token and analysis_id:
     print("   https://sonnylabs-service.onrender.com/analysis")
 else:
     print("❌ Cannot initialize SonnyLabs client - missing credentials")
+    print("   This is normal if you haven't set up your .env file with real credentials yet")
     client = None
 
 # Create a FastMCP server instance with stateless configuration
